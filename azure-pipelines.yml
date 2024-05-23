@@ -1,0 +1,58 @@
+trigger:
+  branches:
+    include:
+      - master
+      - develop
+    exclude:
+      - feature/*
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildConfiguration: 'Development'
+  disable.coverage.autogenerate: 'true'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Build projects'
+  inputs:
+    command: 'build' 
+    projects: '**/*.csproj'
+    arguments: '--configuration $(BuildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Run tests'
+  inputs:
+    command: 'test'
+    projects: '**/*[Tt]est*/*.csproj'
+    arguments: '--no-restore --configuration $(BuildConfiguration) --collect "XPlat Code Coverage" --settings:./coverage.settings.xml'
+
+- task: reportgenerator@5
+  displayName: 'Generate code coverage report'
+  inputs:
+    reports: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+    targetdir: '$(Agent.TempDirectory)/coveragereport'
+    reporttypes: 'HtmlInline_AzurePipelines_Dark;Cobertura'
+
+- task: Bash@3
+  displayName: 'Rename code coverage report file'
+  inputs:
+    targetType: 'inline'
+    script: 'mv $(Agent.TempDirectory)/coveragereport/Cobertura.xml $(Agent.TempDirectory)/coveragereport/CoverageReport.xml'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage results'
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Agent.TempDirectory)/coveragereport/CoverageReport.xml'
+    reportDirectory: '$(Agent.TempDirectory)/coveragereport'
+    failIfCoverageEmpty: true
+
+- task: BuildQualityChecks@9
+  displayName: 'Check build quality'
+  inputs:
+    checkCoverage: true
+    coverageFailOption: 'fixed'
+    coverageType: 'lines'
+    coverageThreshold: '95'

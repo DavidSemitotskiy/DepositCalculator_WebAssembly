@@ -1,0 +1,17 @@
+﻿@using DepositCalculator.UI.Components
+
+@page "/history"
+
+@if (CalculationsHistory.DepositCalculations.Count != 0)
+{
+    <div class="calculations-history">
+        <div class="cards-container">
+            @foreach (var calculationDetailsPageModel in CalculationsHistory.DepositCalculations)
+            {
+                <CalculationCardComponent CalculationDetails="calculationDetailsPageModel" />
+            }
+        </div>
+
+        <button class="custom-btn" @onclick="LoadPaginatedCalculationsAsync" disabled="@(!HasNextPage)">Load more</button>
+    </div>
+}

@@ -1,0 +1,21 @@
+﻿.card {
+    border-radius: 0px;
+    border: 2px solid black;
+    width: 200px;
+    height: 200px;
+}
+
+.card-body .custom-btn {
+    margin-top: 10px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.property-info {
+    display: grid;
+    grid-template-columns: 10fr 8fr;
+    margin-bottom: 7px;
+}

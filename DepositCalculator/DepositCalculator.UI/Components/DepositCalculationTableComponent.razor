@@ -1,0 +1,31 @@
+﻿<div id="calculation-table">
+    <div class="header-container">
+        <table class="table">
+            <thead class="table-head">
+                <tr>
+                    <th class="table-title">Month</th>
+                    <th class="table-title">%</th>
+                    <th class="table-title">Sum</th>
+                </tr>
+            </thead>
+        </table>
+        <div id="offset" class="@GetHeaderOffset()"></div>
+    </div>
+    @if (DepositCalculation.monthlyCalculations.Count != 0)
+    {
+        <div id="scroll" class="@GetCalculationsTableStyle()">
+            <table class="table">
+                <tbody>
+                    @foreach (var monthlyDepositCalculation in DepositCalculation.monthlyCalculations)
+                    {
+                        <tr>
+                            <td class="table-term-item table-item ">@monthlyDepositCalculation.monthNumber</td>
+                            <td class="table-percent-item table-item ">@monthlyDepositCalculation.depositByMonth</td>
+                            <td class="table-sum-item table-item ">@monthlyDepositCalculation.totalDepositAmount</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

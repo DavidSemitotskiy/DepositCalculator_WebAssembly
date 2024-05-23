@@ -1,0 +1,9 @@
+﻿.history-details-container {
+    display: grid;
+    grid-row-gap: 10px;
+}
+
+.custom-btn {
+    width: 130px;
+    margin: 0 auto;
+}

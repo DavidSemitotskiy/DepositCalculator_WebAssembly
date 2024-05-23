@@ -1,0 +1,22 @@
+﻿.calculations-history .custom-btn {
+    margin-top: 50px;
+}
+
+.custom-btn {
+    margin: auto;
+}
+
+.cards-container {
+    display: grid;
+    column-gap: 50px;
+    row-gap: 50px;
+    grid-template-columns: repeat(4, 0fr);
+}
+
+.calculations-history {
+    margin-top: 70px;
+    left: 0;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}

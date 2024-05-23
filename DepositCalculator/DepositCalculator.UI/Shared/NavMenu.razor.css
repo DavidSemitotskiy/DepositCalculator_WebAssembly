@@ -1,0 +1,30 @@
+﻿.nav {
+    display: flex;
+    position: absolute;
+    left: 0;
+    flex-wrap: nowrap;
+}
+
+.nav-item {
+    background-color: white;
+    width: 150px;
+    border: 2px solid black;
+}
+
+.nav-item, .nav-item ::deep a, .nav-item ::deep a.active {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.nav-item ::deep a {
+    text-align: center;
+    color: black;
+}
+
+.nav-item:nth-child(2) {
+    border-left: 0px;
+}
+
+.nav-item ::deep a.active {
+    background-color: lightgray;
+}

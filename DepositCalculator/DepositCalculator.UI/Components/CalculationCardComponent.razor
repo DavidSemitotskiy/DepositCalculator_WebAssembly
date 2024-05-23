@@ -1,0 +1,22 @@
+﻿<div class="card">
+    <div class="card-body">
+        <div class="property-info">
+            <label>Percent: </label>
+            <span>@FormatPercent(CalculationDetails.percent)</span>
+        </div>
+        <div class="property-info">
+            <label>Term: </label>
+            <span>@CalculationDetails.periodInMonths</span>
+        </div>
+        <div class="property-info">
+            <label>Sum: </label>
+            <span>@FormatDepositAmount(CalculationDetails.depositAmount)</span>
+        </div>
+        <div class="property-info">
+            <label>Date: </label>
+            <span>@FormatDate(CalculationDetails.calculatedAt)</span>
+        </div>
+
+        <button class="custom-btn" @onclick="LoadDepositCalculationAsync">See details</button>
+    </div>
+</div>

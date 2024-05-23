@@ -1,0 +1,30 @@
+﻿@using Blazored.FluentValidation
+@using DepositCalculator.Shared.Enums;
+
+<div>
+    <EditForm id="deposit-info-form" Model="@DepositInfoRequest" OnValidSubmit="@SubmitDepositInfoAsync" class="deposit-form">
+
+        <FluentValidationValidator DisableAssemblyScanning="@true" />
+
+        <InputNumber id="percents" @bind-Value="@DepositInfoRequest.Percent" placeholder="Percents" class="input-form" />
+
+        <InputNumber id="terms" @bind-Value="@DepositInfoRequest.PeriodInMonths" placeholder="Terms" class="input-form" />
+
+        <InputNumber id="sum" @bind-Value="@DepositInfoRequest.DepositAmount" placeholder="Sum" class="input-form" />
+
+        <InputRadioGroup id="calculation-approach" @bind-Value=@DepositInfoRequest.CalculationMethod>
+            <label>Select method:</label>
+            <div>
+                <InputRadio id="simple-calculation" Value="@DepositCalculationMethod.Simple" /><label>@DepositCalculationMethod.Simple</label>
+            </div>
+            <div>
+                <InputRadio id="compound-calculation" Value="@DepositCalculationMethod.Compound" /><label>@DepositCalculationMethod.Compound</label>
+            </div>
+        </InputRadioGroup>
+
+        <button type="submit" class="custom-btn">Calculate</button>
+
+        <ValidationSummary />
+
+    </EditForm>
+</div>
